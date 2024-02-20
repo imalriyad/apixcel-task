@@ -4,7 +4,7 @@ import { RiMusicFill } from "react-icons/ri";
 
 const SideBar = () => {
   return (
-    <div className="h-screen fixed bg-[#3B3B3B] w-[160px] px-4">
+    <div className="h-screen drop-shadow-lg fixed bg-[#3B3B3B] w-[160px] px-4">
       <div>
         {/* name/logo */}
         <div className="py-8">

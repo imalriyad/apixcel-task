@@ -1,7 +1,9 @@
+import TopNavigation from "@/components/shared/header/TopNavigation";
+
 export default function Home() {
   return (
-    <>
-      <h1>This is Main layout page</h1>
-    </>
+    <div className="py-8 px-4">
+      <TopNavigation></TopNavigation>
+    </div>
   );
 }

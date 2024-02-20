@@ -13,9 +13,11 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en" data-theme="light">
       <body className={inter.className}>
-        <div className="flex">
+        <div className="flex justify-between">
           <SideBar></SideBar>
-          {children}
+          <div className="bg-[#302f2f] w-full -ml-[-160px] px-4">
+            {children}
+          </div>
         </div>
       </body>
     </html>

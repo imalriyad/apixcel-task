@@ -13,7 +13,7 @@ const MenuItems = () => {
           <h1 className=" text-white text-sm font-bold"> Menu </h1>
           <div className="border-[1px] w-full border-[#d8d6d69c]"></div>
         </span>
-        <ul className="text-white flex text-sm flex-col gap-3">
+        <ul className="text-white flex text-sm flex-col gap-4">
           <li className="flex items-center gap-3 font-medium">
             <IoMdHome className="text-base" />
             Home
@@ -40,7 +40,7 @@ const MenuItems = () => {
           <h1 className=" text-white text-sm font-bold"> My Playlist </h1>
           <div className="border-[1px] w-[25%] border-[#d8d6d69c]"></div>
         </span>
-        <ul className="text-white flex text-sm flex-col gap-3">
+        <ul className="text-white flex text-sm flex-col gap-4">
           <li className="flex items-center gap-3 font-medium">
             <RiPlayListFill className="text-base" />
             Playlist #A
