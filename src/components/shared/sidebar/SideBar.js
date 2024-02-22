@@ -1,4 +1,4 @@
-import MenuItems from "./sidebar/MenuItems";
+import MenuItems from "./MenuItems";
 import "/src/styles/fonts.css";
 import { RiMusicFill } from "react-icons/ri";
 

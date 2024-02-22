@@ -3,9 +3,21 @@ import Image from "next/image";
 import { useState } from "react";
 import { IoSearch } from "react-icons/io5";
 import { HiMicrophone } from "react-icons/hi2";
+import Signin from "../../form/signin/Signin";
+import Signup from "../../form/signup/Signup";
 
 const TopNavigation = () => {
-  const [user, setUser] = useState(true);
+  const [user, setUser] = useState(false);
+
+  const handleModalSignIn = () => {
+    document.getElementById("signInModal").showModal();
+    document?.getElementById("signUpModal")?.close();
+  };
+
+  const handleModalSignUp = () => {
+    document.getElementById("signUpModal").showModal();
+    document?.getElementById("signInModal")?.close();
+  };
   return (
     <div>
       {/* if user not loggedin */}
@@ -15,10 +27,16 @@ const TopNavigation = () => {
             Welcome to fauget music services
           </h1>
           <div className="flex items-center gap-6 ">
-            <button className=" text-white drop-shadow-lg px-8 py-2 text-sm rounded-xl bg-[#000000]">
+            <button
+              onClick={handleModalSignIn}
+              className=" text-white drop-shadow-lg px-8 py-2 text-sm rounded-xl bg-[#000000]"
+            >
               Sign in{" "}
             </button>
-            <button className=" text-white drop-shadow-lg px-8 py-2 text-sm rounded-xl bg-[#69656549] ">
+            <button
+              onClick={handleModalSignUp}
+              className=" text-white drop-shadow-lg px-8 py-2 text-sm rounded-xl bg-[#69656549] "
+            >
               Sign up
             </button>
           </div>
@@ -57,6 +75,8 @@ const TopNavigation = () => {
           </div>
         </div>
       )}
+      <Signin></Signin>
+      <Signup></Signup>
     </div>
   );
 };
