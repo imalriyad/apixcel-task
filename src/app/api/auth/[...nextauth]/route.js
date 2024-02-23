@@ -17,18 +17,34 @@ const authOptions = {
         await connect();
         try {
           const user = await User.findOne({ email: credentials.email });
+
           if (user) {
             const isPasswordOk = await bcrypt.compare(
               credentials.password,
               user.password
             );
             if (isPasswordOk) {
-              return user;
+              console.log("auth", user);
+              // Log user data before returning
+              console.log("Sending user data:", {
+                id: user._id.toString(),
+                name: user?.name,
+                email: user?.email,
+                image: user?.image,
+              });
+
+              return {
+                id: user._id.toString(),
+                name: user.name,
+                email: user.email,
+                image: user.image,
+              };
             }
           }
         } catch (error) {
           throw new Error(error);
         }
+        return null;
       },
     }),
   ],

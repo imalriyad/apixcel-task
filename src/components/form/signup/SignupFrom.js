@@ -1,4 +1,5 @@
 "use client";
+import axios from "axios";
 import { useState } from "react";
 
 const SignupFrom = () => {
@@ -7,24 +8,38 @@ const SignupFrom = () => {
   // Handle SignUp
   const handleSignUp = async (e) => {
     e.preventDefault();
+    const name = e.target.name.value;
     const email = e.target.email.value;
-    const passwordOne = e.target.passwordOne.value;
-    const passwordTwo = e.target.passwordTwo.value;
-
-    if (passwordOne !== passwordTwo) {
-      return setError("Password Doesnt macth");
+    const password = e.target.password.value;
+    if (name === "") {
+      return setError("Name is Required");
     }
-    if (passwordOne === "" || passwordTwo === "") {
+    if (email === "") {
+      return setError("Email is Required");
+    }
+    if (password === "") {
       return setError("Password is Required");
     }
-    const password = passwordOne;
+    const fileInput = document.getElementById("photoInput");
+    const imageFile = { image: fileInput.files[0] };
+    const response = await axios.post(
+      process.env.NEXT_PUBLIC_PHOTOAPI,
+      imageFile,
+      {
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+      }
+    );
+
+    const image = response.data?.data?.display_url;
 
     const res = await fetch("/api/signup", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify({ email, password }),
+      body: JSON.stringify({ name, email, password, image }),
     });
 
     if (res.status === 400) {
@@ -46,10 +61,21 @@ const SignupFrom = () => {
       <form onSubmit={handleSignUp} className="max-w-xs space-y-2 mx-auto">
         <div className="w-full flex flex-col">
           <span className="text-left label font-light text-[#FFFFFF99]">
-            Email
+            Name
           </span>
           <input
             type="text"
+            name="name"
+            className="input input-sm rounded-md text-white bg-[#000000] py-5 focus:outline-none pl-3 w-full "
+            placeholder="Name"
+          />
+        </div>
+        <div className="w-full flex flex-col">
+          <span className="text-left label font-light text-[#FFFFFF99]">
+            Email
+          </span>
+          <input
+            type="email"
             name="email"
             className="input input-sm rounded-md text-white bg-[#000000] py-5 focus:outline-none pl-3 w-full "
             placeholder="example@mail.com"
@@ -60,7 +86,7 @@ const SignupFrom = () => {
             Password
           </span>
           <input
-            name="passwordOne"
+            name="password"
             type="password"
             className="input input-sm rounded-md text-white bg-[#000000] py-5 focus:outline-none pl-3 w-full "
             placeholder="Password"
@@ -68,15 +94,16 @@ const SignupFrom = () => {
         </div>
         <div className="w-full flex flex-col pb-4">
           <span className="text-left label font-light text-[#FFFFFF99]">
-            Password
+            Headshot
           </span>
           <input
-            name="passwordTwo"
-            type="password"
-            className="input input-sm rounded-md text-white bg-[#000000] py-5 focus:outline-none pl-3 w-full "
-            placeholder="Password"
+            type="file"
+            name="photo"
+            id="photoInput"
+            className="file-input file-input-bordered file-input-sm w-full max-w-xs"
           />
         </div>
+
         {error && <p className="text-sm text-red-500">{error}</p>}
         <button
           type="submit"
@@ -84,7 +111,7 @@ const SignupFrom = () => {
         >
           Create an account
         </button>
-        <p className="text-[13px] text-[#FFFFFF99]">
+        <p className="text-sm text-[#FFFFFF99]">
           Have account?
           <span
             onClick={handleModalSignIn}

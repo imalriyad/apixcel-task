@@ -22,7 +22,7 @@ const Signup = () => {
               <RiMusicFill className="text-xl" />
               Fauget
             </h1>
-            <h1 className="text-2xl text-center text-white py-8 font-semibold">
+            <h1 className="text-2xl text-center text-white mt-6 font-semibold">
               {" "}
               Sign up
             </h1>

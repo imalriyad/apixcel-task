@@ -1,8 +1,8 @@
 import { Inter } from "next/font/google";
 import "./globals.css";
-import SideBar from "@/components/shared/sidebar/SideBar";
 import { getServerSession } from "next-auth";
 import SessionProviderWrapper from "@/utils/SessionProviderWrapper";
+import InfoWrapper from "@/utils/InfoWrapper";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -18,12 +18,7 @@ export default function RootLayout({ children }) {
     <html lang="en" data-theme="light">
       <body className={inter.className}>
         <SessionProviderWrapper session={session}>
-          <div className="flex justify-between">
-            <SideBar></SideBar>
-            <div className="bg-[#302f2f] w-full -ml-[-160px] px-4">
-              {children}
-            </div>
-          </div>
+          <InfoWrapper>{children}</InfoWrapper>
         </SessionProviderWrapper>
       </body>
     </html>

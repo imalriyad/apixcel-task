@@ -2,3 +2,16 @@
 @tailwind components;
 @tailwind utilities;
 
+@media (min-width: 768px) {
+    .heroDiv {
+        margin-left: 160px;
+    }
+}
+
+
+.centered-div {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+}

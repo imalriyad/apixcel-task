@@ -1,14 +1,11 @@
-"use client"
 import { IoMdHome } from "react-icons/io";
 import { RiMusicFill } from "react-icons/ri";
 import { IoIosSettings } from "react-icons/io";
-import { IoLogOutOutline } from "react-icons/io5";
 import { RiPlayListFill } from "react-icons/ri";
-import { useSession } from "next-auth/react";
+import Logout from "@/utils/logout";
+import Link from "next/link";
 
 const MenuItems = () => {
-  const {data:session} = useSession()
-  console.log("seasion data",session);
   return (
     <div className="flex flex-col gap-20 justify-start h-screen">
       <div>
@@ -26,16 +23,15 @@ const MenuItems = () => {
             <RiMusicFill className="text-base" />
             Podcast
           </li>
-          <li className="flex items-center gap-3 font-medium">
-            <IoIosSettings className="text-base" />
-            Settings
-          </li>
-          {session && (
+          <Link href={"/setting"}>
+            {" "}
             <li className="flex items-center gap-3 font-medium">
-              <IoLogOutOutline className="text-base" />
-              Logout
+              <IoIosSettings className="text-base" />
+              Settings
             </li>
-          )}
+          </Link>
+
+          <Logout></Logout>
         </ul>
       </div>
 

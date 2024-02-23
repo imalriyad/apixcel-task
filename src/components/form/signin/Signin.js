@@ -8,11 +8,11 @@ const Signin = () => {
   const router = useRouter();
   const session = useSession();
 
-  // useEffect(() => {
-  //   if (session?.status === "authenticated") {
-  //     router.replace("/");
-  //   }
-  // }, [session, router]);
+  useEffect(() => {
+    if (session?.status === "authenticated") {
+      router.replace("/");
+    }
+  }, [session, router]);
 
   // handle login
   const handleSignIn = async (e) => {
@@ -28,7 +28,7 @@ const Signin = () => {
       email,
       password,
     });
-
+    document?.getElementById("signInModal")?.close();
     if (res?.error) {
       setError("Invalid Email and Password");
     }
