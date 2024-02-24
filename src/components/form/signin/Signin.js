@@ -28,7 +28,11 @@ const Signin = () => {
       email,
       password,
     });
-    document?.getElementById("signInModal")?.close();
+    if (res.ok) {
+       document?.getElementById("signInModal")?.close();
+    }
+    console.log(res);
+   
     if (res?.error) {
       setError("Invalid Email and Password");
     }

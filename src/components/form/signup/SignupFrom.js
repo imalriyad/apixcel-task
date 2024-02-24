@@ -47,6 +47,7 @@ const SignupFrom = () => {
     }
     if (res.status === 200) {
       setError("");
+      document.getElementById("signInModal").showModal();
       document?.getElementById("signUpModal")?.close();
     }
   };

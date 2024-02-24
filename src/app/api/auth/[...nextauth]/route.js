@@ -5,6 +5,7 @@ import NextAuth from "next-auth/next";
 import CredentialsProvider from "next-auth/providers/credentials";
 
 const authOptions = {
+  
   providers: [
     CredentialsProvider({
       id: "credentials",
@@ -13,26 +14,25 @@ const authOptions = {
         email: { label: "email", type: "text" },
         password: { label: "password", type: "password" },
       },
+
       async authorize(credentials) {
+
+        // connecting to db
         await connect();
         try {
+
+          // finding the spacific user from db
           const user = await User.findOne({ email: credentials.email });
 
+          // cheaking password validation
           if (user) {
             const isPasswordOk = await bcrypt.compare(
               credentials.password,
               user.password
             );
-            if (isPasswordOk) {
-              console.log("auth", user);
-              // Log user data before returning
-              console.log("Sending user data:", {
-                id: user._id.toString(),
-                name: user?.name,
-                email: user?.email,
-                image: user?.image,
-              });
 
+            // sending response if password is correct
+            if (isPasswordOk) {
               return {
                 id: user._id.toString(),
                 name: user.name,

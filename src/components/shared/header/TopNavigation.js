@@ -7,9 +7,12 @@ import Signup from "../../form/signup/Signup";
 import { useSession } from "next-auth/react";
 import { IoMdMenu } from "react-icons/io";
 import { RxCross2 } from "react-icons/rx";
+import { useSearch } from "@/utils/SearchContext";
+import { useEffect } from "react";
 
 const TopNavigation = ({ setShow, isShow }) => {
   const { data: session } = useSession();
+  const { setSearchText } = useSearch();
   const handleModalSignIn = () => {
     document.getElementById("signInModal").showModal();
     document?.getElementById("signUpModal")?.close();
@@ -36,6 +39,14 @@ const TopNavigation = ({ setShow, isShow }) => {
             </span>{" "}
             Welcome to fauget music
           </h1>
+          <span
+            className={`absolute right-2 top-2 ${isShow ? "block" : " hidden"}`}
+            onClick={() => setShow(false)}
+          >
+            <button className="btn btn-sm glass md:hidden block text-white">
+              <RxCross2 />
+            </button>
+          </span>{" "}
           <div className="flex items-center gap-6 ">
             <button
               onClick={handleModalSignIn}
@@ -66,7 +77,7 @@ const TopNavigation = ({ setShow, isShow }) => {
                   <IoMdMenu />
                 </button>
               </span>{" "}
-              Welcome, {session?.user.name}
+              Welcome, {session?.user?.name}
             </h1>
             <span
               className={`absolute right-0 top-0 ${
@@ -83,6 +94,7 @@ const TopNavigation = ({ setShow, isShow }) => {
           <div className="flex w-full items-center gap-4">
             <label className="relative w-full">
               <input
+                onChange={(e) => setSearchText(e.target.value)}
                 type="text"
                 className="input input-sm font-semibold text-white bg-[#5a5757] py-5 rounded-2xl pl-10 w-full"
                 placeholder="Artist, Music, Album"

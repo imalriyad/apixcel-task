@@ -3,7 +3,7 @@ import "./globals.css";
 import { getServerSession } from "next-auth";
 import SessionProviderWrapper from "@/utils/SessionProviderWrapper";
 import InfoWrapper from "@/utils/InfoWrapper";
-
+import { SearchProvider } from "@/utils/SearchContext";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata = {
@@ -11,14 +11,15 @@ export const metadata = {
   description: "Listen podcast everyday",
 };
 
-const session = await getServerSession();
-
-export default function RootLayout({ children }) {
+export default async function RootLayout({ children }) {
+  const session = await getServerSession();
   return (
     <html lang="en" data-theme="light">
       <body className={inter.className}>
         <SessionProviderWrapper session={session}>
-          <InfoWrapper>{children}</InfoWrapper>
+          <SearchProvider>
+            <InfoWrapper>{children}</InfoWrapper>
+          </SearchProvider>
         </SessionProviderWrapper>
       </body>
     </html>

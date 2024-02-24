@@ -6,13 +6,14 @@ import { useState } from "react";
 const InfoWrapper = ({ children }) => {
   const [isShow, setShow] = useState(false);
 
+
   return (
     <>
       <div className="flex justify-between ">
         <SideBar isShow={isShow}></SideBar>
         <div
-          className=" w-full h-auto px-4 heroDiv"
-          style={{ backgroundColor: "#302f2f" }}
+          className="w-full h-auto px-4 heroDiv"
+          style={{ backgroundColor: "#191919" }}
         >
           <TopNavigation setShow={setShow} isShow={isShow}></TopNavigation>
           {children}

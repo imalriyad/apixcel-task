@@ -4,8 +4,14 @@ import { IoIosSettings } from "react-icons/io";
 import { RiPlayListFill } from "react-icons/ri";
 import Logout from "@/utils/logout";
 import Link from "next/link";
-
+import { usePathname } from "next/navigation";
 const MenuItems = () => {
+  const router = usePathname();
+
+  const isActive = (href) => {
+    return router === href ? "text-[#069D95]" : "";
+  };
+
   return (
     <div className="flex flex-col gap-20 justify-start h-screen">
       <div>
@@ -15,17 +21,32 @@ const MenuItems = () => {
           <div className="border-[1px] w-full border-[#d8d6d69c]"></div>
         </span>
         <ul className="text-white flex text-sm flex-col gap-4">
-          <li className="flex items-center gap-3 font-medium">
-            <IoMdHome className="text-base" />
-            Home
-          </li>
-          <li className="flex items-center gap-3 font-medium">
-            <RiMusicFill className="text-base" />
-            Podcast
-          </li>
+          <Link href={"/"}>
+            <li
+              className={`flex items-center gap-3 font-medium ${isActive("/")}`}
+            >
+              <IoMdHome className="text-base" />
+              Home
+            </li>
+          </Link>
+          <Link href={"/podcasts"}>
+            <li
+              className={`flex items-center gap-3 font-medium ${isActive(
+                "/podcasts"
+              )}`}
+            >
+              <RiMusicFill className="text-base" />
+              Podcast
+            </li>
+          </Link>
+
           <Link href={"/setting"}>
             {" "}
-            <li className="flex items-center gap-3 font-medium">
+            <li
+              className={`flex items-center gap-3 font-medium ${isActive(
+                "/setting"
+              )}`}
+            >
               <IoIosSettings className="text-base" />
               Settings
             </li>
