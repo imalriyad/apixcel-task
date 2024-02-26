@@ -80,7 +80,7 @@ const PodcastPage = ({ params }) => {
       <div className="relative ">
         <Image
           src={podcast?.album?.cover_xl}
-          alt="dp"
+          alt="music cover"
           width={300}
           className="object-cover opacity-90 w-full h-[250px] "
           height={250}
