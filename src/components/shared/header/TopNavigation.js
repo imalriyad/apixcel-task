@@ -8,7 +8,7 @@ import { useSession } from "next-auth/react";
 import { IoMdMenu } from "react-icons/io";
 import { RxCross2 } from "react-icons/rx";
 import { useSearch } from "@/utils/SearchContext";
-import { useEffect } from "react";
+
 
 const TopNavigation = ({ setShow, isShow }) => {
   const { data: session } = useSession();

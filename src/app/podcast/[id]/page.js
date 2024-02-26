@@ -6,14 +6,24 @@ import pause from "/public/pause.png";
 import { useEffect, useRef, useState } from "react";
 import { useSearch } from "@/utils/SearchContext";
 import Card from "@/components/shared/Card";
+import { useSession } from "next-auth/react";
+import { useRouter } from "next/navigation";
+
 const PodcastPage = ({ params }) => {
   const [podcast, setPodcast] = useState([]);
-  const { searchText } = useSearch();
+  const { searchText,setSearchText } = useSearch();
   const [isPlaying, setIsPlaying] = useState(false);
   const [related, setRelated] = useState([]);
   const audioRef = useRef(null);
   const { id } = params;
-
+    const { data: session } = useSession();
+    
+  const router = useRouter();
+  useEffect(() => {
+    if (!session) {
+      router.push("/");
+    }
+  }, [router, session]);
   useEffect(() => {
     const fetchPodcast = async () => {
       try {
@@ -44,20 +54,27 @@ const PodcastPage = ({ params }) => {
 
     fetchPodcast();
   }, []);
+    
+     const handleButtonClick = (text) => {
+       setSearchText(text);
+     };
 
   const handlePlay = () => {
-    if (audioRef.current.paused) {
-      audioRef.current.play();
+    if (audioRef?.current.paused) {
+      audioRef?.current.play();
       setIsPlaying(true);
     } else {
-      audioRef.current.pause();
+      audioRef?.current.pause();
       setIsPlaying(false);
     }
   };
   useEffect(() => {
-    audioRef.current.play();
+    audioRef?.current.play();
     setIsPlaying(true);
   }, []);
+    
+
+
   return (
     <div className="bg-[#191919] min-h-screen text-white">
       <div className="relative ">
